@@ -25,7 +25,6 @@
   (high 0 :type u64))
 
 (define-ftype valid-string? (string) boolean)
-(declaim (inline valid-string?))
 (defun valid-string? (string)
   (and (= (nth-value 1 (parse-integer (remove #\- string) :radix 16 :junk-allowed t)) 32)
        (char= (char string 8) (char string 13) (char string 18) (char string 23) #\-)))
@@ -52,7 +51,7 @@
       (%write string 12 24 44 low)
       string)))
 
-(define-ftype from-string ((simple-string 36)) uuid)
+(define-ftype from-string (string) uuid)
 (defun from-string (string)
   (declare (optimize (speed 3)))
   (flet ((parse-variant (bits)
