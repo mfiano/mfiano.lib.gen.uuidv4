@@ -77,7 +77,8 @@
                   :high high))))
 
 (define-ftype make-uuid (&optional (fn (u64) u64)) uuid)
-(defun make-uuid (&optional (rng #'random))
+(defun make-uuid (&optional (rng (let ((state (make-random-state t)))
+                                   (lambda (limit) (random limit state)))))
   (declare (optimize (speed 3)))
   (declare (type (fn (u64) u64) rng))
   (%make-uuid :version 4
