@@ -24,9 +24,10 @@
   (low 0 :type u64)
   (high 0 :type u64))
 
-(define-ftype valid-string? (string) boolean)
+(define-ftype valid-string? (t) boolean)
 (defun valid-string? (string)
-  (and (= (nth-value 1 (parse-integer (remove #\- string) :radix 16 :junk-allowed t)) 32)
+  (and (stringp string)
+       (= (nth-value 1 (parse-integer (remove #\- string) :radix 16 :junk-allowed t)) 32)
        (char= (char string 8) (char string 13) (char string 18) (char string 23) #\-)))
 
 (define-ftype to-string (uuid) string)
