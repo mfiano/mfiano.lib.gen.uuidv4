@@ -81,7 +81,7 @@
   (declare (optimize (speed 3)))
   (declare (type (fn (u64) u64) rng))
   (%make-uuid :version 4
-              :low (dpb 4 (byte 3 61) (funcall rng #.max/u64))
+              :low (dpb 2 (byte 2 62) (funcall rng #.max/u64))
               :high (dpb 4 (byte 4 12) (funcall rng #.max/u64))))
 
 (define-printer (uuid stream :type t)

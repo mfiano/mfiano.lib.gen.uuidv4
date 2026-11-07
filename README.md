@@ -30,7 +30,7 @@ It's mostly useless, but it's a thing.
 
 (defparameter *id* (mfiano.lib.gen.uuidv4:make-uuid))
 (mfiano.lib.gen.uuidv4:to-string *id*)
-;; => "xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx" (example shape)
+;; => "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx" (example shape, where y is 8, 9, a or b)
 
 (defparameter *id2*
   (mfiano.lib.gen.uuidv4:from-string "f47ac10b-58cc-4372-a567-0e02b2c3d479"))
