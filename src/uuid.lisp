@@ -81,14 +81,15 @@
                   :low low
                   :high high))))
 
-(define-ftype make-uuid (&optional (fn (u64) u64)) uuid)
-(defun make-uuid (&optional (rng (let ((state (make-random-state t)))
-                                   (lambda (limit) (random limit state)))))
+(define-ftype make-uuid () uuid)
+(defun make-uuid ()
   (declare (optimize (speed 3)))
-  (declare (type (fn (u64) u64) rng))
-  (%make-uuid :version 4
-              :low (dpb 2 (byte 2 62) (funcall rng #.max/u64))
-              :high (dpb 4 (byte 4 12) (funcall rng #.max/u64))))
+  (flet ((random-word ()
+           (ironclad:strong-random max/u64)))
+    (declare (ftype (function () u64) random-word))
+    (%make-uuid :version 4
+                :low (dpb 2 (byte 2 62) (random-word))
+                :high (dpb 4 (byte 4 12) (random-word)))))
 
 (define-printer (uuid stream :type t)
   (format stream "~a" (to-string uuid)))

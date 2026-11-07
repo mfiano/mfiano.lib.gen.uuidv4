@@ -5,7 +5,8 @@
   :homepage "https://github.com/mfiano/mfiano.lib.gen.uuidv4"
   :encoding :utf-8
   :depends-on
-  (#:mfiano.lib.base)
+  (#:ironclad/core
+   #:mfiano.lib.base)
   :pathname "src"
   :serial t
   :components
